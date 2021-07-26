@@ -1,0 +1,50 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet">
+
+<div id="kh-menu">
+  <button id="menu-toggle-btn" (click)="toggleMenu()" title="open/close menu">
+    <div class="menu-toggle" [class.is-active]="menuDisabled === false"></div>
+  </button>
+  
+  <div class="backdrop" *ngIf="menuDisabled === false" [@fadeInOut]>
+    <div class="left-bar">
+      <div title="Show current user data"><i class="fa fa-user-circle-o"></i></div>
+      <div title="Show menu settings"><i class="fa fa-gear"></i></div>
+      <div title="Log off" (click)="menuDisabled = true;"><i class="fa fa-power-off"></i></div>
+    </div>
+  
+    <div id="wrapper">
+      <div id="left-sidebar">
+        <div class="title">
+          <span>Create new</span>
+        </div>
+        <div class="item-container">
+          <div *ngFor="let item of listItems">
+            <i class="fa {{item.Icon}}"></i>&nbsp;
+            <span>{{item.Name}}</span>
+          </div>
+        </div>
+      </div>
+  
+      <div id="tile-container">
+        <div class="title">
+          <span>Menu</span>
+        </div>
+        <div class="item-container">
+          <div class="{{tile.SizeType}}" [class.flip-animation]="tile.AnimationType === AnimationType.Flip"
+            [class.fade-animation]="tile.AnimationType === AnimationType.Fade" title="{{tile.Name}}"
+            *ngFor="let tile of tileList" (click)="menuDisabled = true;">
+            <div>
+              <i class="fa {{tile.Icon}}"></i>
+            </div>
+            <div>
+              <span>{{tile.Name}}</span>
+              <small>{{tile.Description}}</small>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+</div>
